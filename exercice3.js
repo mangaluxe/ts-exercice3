@@ -1,34 +1,19 @@
 // ==================== Exercice 3 TypScript ====================
-// class Contact {
-//     firstname: string;
-//     lastname: string;
-//     dateOfBirth: Date;
-//     email: string;
-//     phone: string;
-//     constructor(firstname: string, lastname: string, dateOfBirth: string, email: string, phone: string) {
-//         this.firstname = firstname;
-//         this.lastname = lastname;
-//         this.dateOfBirth = new Date(dateOfBirth);
-//         this.email = email;
-//         this.phone = phone;
-//     }
-// }
 const result = document.getElementById("result");
 const formContact = document.getElementById("formContact");
-let editIndex = null; // Pour edit
+let editIndex = null; // Pour mémoriser l'indice du contact en cours d'édition
 /**
  * Initialiser les contacts dans localStorage si la liste est vide
  */
 function iniContacts() {
-    const contactList = getContactList(); // Récupérer la liste existante
-    if (contactList.length === 0) { // Si la liste est vide, on ajoute les contacts par défaut
+    const contactList = getContactList();
+    if (contactList.length === 0) {
         const defaultContacts = [
-            { firstname: "Mario", lastname: "Mario", dateOfBirth: "01/05/1991", email: "mario@gmail.com", phone: "0660355312" },
-            { firstname: "Luigi", lastname: "Mario", dateOfBirth: "05/10/1992", email: "luigi@yahoo.fr", phone: "0601101212" },
-            { firstname: "Megaman", lastname: "Rockman", dateOfBirth: "10/12/1994", email: "megamann@laposte.net", phone: "+(33)6 12 12 12 12" }
+            { firstname: "Mario", lastname: "Mario", dateOfBirth: "1991-05-01", email: "mario@gmail.com", phone: "0660355312" },
+            { firstname: "Luigi", lastname: "Mario", dateOfBirth: "1992-10-05", email: "luigi@yahoo.fr", phone: "0601101212" },
+            { firstname: "Megaman", lastname: "Rockman", dateOfBirth: "1994-12-10", email: "megaman@laposte.net", phone: "0770123456" }
         ];
-        contactList.push(...defaultContacts);
-        setContactList(contactList); // Sauvegarde dans localStorage
+        setContactList(defaultContacts);
     }
 }
 // ----- Read -----
@@ -52,71 +37,111 @@ function setContactList(contactList) {
 function addContact() {
     const contactList = getContactList();
     if (result) {
-        result.innerHTML = ''; // Efface l'ancienne liste sinon dédouble
+        result.innerHTML = '';
     }
     for (let i = 0; i < contactList.length; i++) {
         const c = contactList[i];
         result.innerHTML += `
-            <tr>
-                <td>${c.firstname}</td>
-                <td>${c.lastname}</td>
-                <td>${new Date(c.dateOfBirth).toDateString()}</td>
-                <td>${c.email}</td>
-                <td>${c.phone}</td>
-                <td><button class="btn btn-warning">Editer</button></td>
-                <td><button class="btn btn-danger" onclick="removeContact(${i})">Supprimer</button></td>
-            </tr>`;
+            <li>
+                <div class="e">${c.firstname} ${c.lastname}</div>
+                <div class="e">${new Date(c.dateOfBirth).toLocaleDateString()}</div>
+                <div class="e">${c.email}</div>
+                <div class="e">${c.phone}</div>
+                <div class="e">
+                    <button class="mini-btn btn-warning openmodal" data-id="${i}">Editer</button>
+                </div>
+                <div class="e">
+                    <button class="mini-btn btn-danger" onclick="removeContact(${i})">Supprimer</button>
+                </div>
+            </li>`;
     }
+    attachEditEvent(); // Ajout de l'événement après la mise à jour du DOM
 }
-if (formContact) {
-    formContact.addEventListener("submit", function (e) {
-        e.preventDefault();
-        const firstnameInput = document.querySelector('input[name="firstname"]');
-        const lastnameInput = document.querySelector('input[name="lastname"]');
-        const dateOfBirthInput = document.querySelector('input[name="dateOfBirth"]');
-        const emailInput = document.querySelector('input[name="email"]');
-        const phoneInput = document.querySelector('input[name="phone"]');
-        if (!firstnameInput || !lastnameInput || !dateOfBirthInput || !emailInput || !phoneInput) {
-            console.error("Un ou plusieurs champs manquants.");
-            return;
-        }
-        const firstname = firstnameInput.value;
-        const lastname = lastnameInput.value;
-        const dateOfBirth = dateOfBirthInput.value;
-        const email = emailInput.value;
-        const phone = phoneInput.value;
-        if (!firstname || !lastname || !dateOfBirth || !email || !phone) {
-            return;
-        }
-        const contact = { firstname, lastname, dateOfBirth, email, phone };
-        const contactList = getContactList();
-        if (editIndex !== null) { // Update
-            contactList[editIndex] = contact;
-            editIndex = null;
-        }
-        else { // Nouveau contact
-            contactList.push(contact);
-        }
-        setContactList(contactList);
-        addContact();
-        formContact.reset();
+/**
+ * Attacher les événements de clic sur les boutons d'édition
+ */
+function attachEditEvent() {
+    const openmodal = document.querySelectorAll(".openmodal");
+    openmodal.forEach((btn) => {
+        btn.addEventListener("click", function () {
+            editContact(this);
+            body.classList.add("modal-active");
+            document.getElementById("info-id").innerText = this.getAttribute("data-id");
+        });
     });
 }
+formContact.addEventListener("submit", function (e) {
+    e.preventDefault();
+    const firstnameInput = formContact.querySelector('input[name="firstname"]');
+    const lastnameInput = formContact.querySelector('input[name="lastname"]');
+    const dateOfBirthInput = formContact.querySelector('input[name="dateOfBirth"]');
+    const emailInput = formContact.querySelector('input[name="email"]');
+    const phoneInput = formContact.querySelector('input[name="phone"]');
+    const contact = {
+        firstname: firstnameInput.value,
+        lastname: lastnameInput.value,
+        dateOfBirth: dateOfBirthInput.value,
+        email: emailInput.value,
+        phone: phoneInput.value
+    };
+    const contactList = getContactList();
+    if (editIndex !== null) { // Update
+        contactList[editIndex] = contact;
+        editIndex = null;
+    }
+    else { // Nouveau contact
+        contactList.push(contact);
+    }
+    setContactList(contactList);
+    addContact();
+    formContact.reset();
+});
 // ----- Update -----
+const formContact2 = document.getElementById('formContact2');
+formContact2.addEventListener("submit", function (e) {
+    e.preventDefault();
+    const firstnameInput = formContact2.querySelector('input[name="firstname"]');
+    const lastnameInput = formContact2.querySelector('input[name="lastname"]');
+    const dateOfBirthInput = formContact2.querySelector('input[name="dateOfBirth"]');
+    const emailInput = formContact2.querySelector('input[name="email"]');
+    const phoneInput = formContact2.querySelector('input[name="phone"]');
+    const contact = {
+        firstname: firstnameInput.value,
+        lastname: lastnameInput.value,
+        dateOfBirth: dateOfBirthInput.value,
+        email: emailInput.value,
+        phone: phoneInput.value
+    };
+    const contactList = getContactList();
+    if (editIndex !== null) {
+        contactList[editIndex] = contact;
+        editIndex = null;
+    }
+    setContactList(contactList);
+    addContact();
+    formContact2.reset();
+    body.classList.remove("modal-active");
+});
 /**
  * Editer contact
  * @param index
  */
-function editContact(index) {
+function editContact(button) {
+    const index = Number(button.getAttribute('data-id'));
     const contactList = getContactList();
     const contact = contactList[index];
     if (contact) {
-        document.querySelector('input[name="firstname"]').value = contact.firstname;
-        document.querySelector('input[name="lastname"]').value = contact.lastname;
-        document.querySelector('input[name="dateOfBirth"]').value = contact.dateOfBirth;
-        document.querySelector('input[name="email"]').value = contact.email;
-        document.querySelector('input[name="phone"]').value = contact.phone;
-        editIndex = index;
+        const firstnameField = formContact2.querySelector('input[name="firstname"]');
+        const lastnameField = formContact2.querySelector('input[name="lastname"]');
+        const dateOfBirthField = formContact2.querySelector('input[name="dateOfBirth"]');
+        const emailField = formContact2.querySelector('input[name="email"]');
+        const phoneField = formContact2.querySelector('input[name="phone"]');
+        firstnameField.value = contact.firstname;
+        lastnameField.value = contact.lastname;
+        dateOfBirthField.value = contact.dateOfBirth;
+        emailField.value = contact.email;
+        phoneField.value = contact.phone;
+        editIndex = index; // Stocker l'index du contact en cours d'édition
     }
 }
 // ----- Delete -----
@@ -124,7 +149,7 @@ function editContact(index) {
  * Supprimer un contact
  */
 function removeContact(index) {
-    let contactList = getContactList();
+    const contactList = getContactList();
     contactList.splice(index, 1);
     setContactList(contactList);
     addContact();
@@ -132,3 +157,11 @@ function removeContact(index) {
 // ----- -----
 iniContacts(); // Ajouter les contacts initiaux
 addContact(); // Afficher la liste des contacts
+// ----- Fermer modal -----
+const body = document.querySelector("body");
+const closemodal = document.querySelectorAll(".closemodal");
+closemodal.forEach(function (el) {
+    el.addEventListener("click", function () {
+        body.classList.remove("modal-active");
+    });
+});

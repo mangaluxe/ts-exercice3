@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Contact</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <main class="container">
+
+        <h1>Contact</h1>
+        <hr>
+    
+        <h2>Liste de contact</h2>
+    
+        <div class="table-list-head">
+            <div class="e">Prénom Nom</div>
+            <div class="e">Date de naissance</div>
+            <div class="e">Email</div>
+            <div class="e">Téléphone</div>
+            <div class="e">Editer</div>
+            <div class="e">Supprimer</div>
+        </div>
+        <ul class="table-list" id="result">
+    
+        </ul>
+
+        <hr>
+
+        <h2>Ajouter contact</h2>
+
+        <div class="contact-box">
+
+            <form id="formContact">
+
+                <div>
+                    <input placeholder="Votre prénom" name="firstname" type="text">
+                </div>
+    
+                <div>
+                    <input placeholder="Votre nom" name="lastname" type="text">
+                </div>
+        
+                <div>
+                    <input placeholder="Votre date naissance" name="dateOfBirth" type="date">
+                </div>
+                
+                <div>
+                    <input placeholder="Votre email" name="email" type="email">
+                </div>
+    
+                <div>
+                    <input placeholder="Votre téléphone" name="phone" type="phone">
+                </div>
+    
+        
+                <div class="text-center">
+                    <button class="btn btn-success" type="submit">Valider</button>
+                </div>
+    
+            </form>
+
+        </div>
+
+    </main>
+    
+
+
+    <div class="modal-overlay">
+
+        <div class="modal">
+            <div class="modal-body">
+                <span class="closemodal"></span>
+
+                <h2>Editer contact <span id="info-id"></span></h2>
+
+                <div class="contact-box">
+
+                    <form id="formContact2">
+                        <input type="hidden" name="id">
+        
+                        <div>
+                            <input placeholder="Votre prénom" name="firstname" type="text">
+                        </div>
+            
+                        <div>
+                            <input placeholder="Votre nom" name="lastname" type="text">
+                        </div>
+                
+                        <div>
+                            <input placeholder="Votre date naissance" name="dateOfBirth" type="date">
+                        </div>
+                        
+                        <div>
+                            <input placeholder="Votre email" name="email" type="email">
+                        </div>
+            
+                        <div>
+                            <input placeholder="Votre téléphone" name="phone" type="phone">
+                        </div>
+            
+                
+                        <div class="text-center">
+                            <button class="btn btn-success" type="submit">Valider</button>
+                        </div>
+            
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+    <script src="exercice3.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,249 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+:root { /* Déclaration de variables css */
+    --white: #fcfcfc;
+    --grey: #c4c4c4;
+    --black: #161515;
+    --green: #188a54;
+    --red: #CC0000;
+    --yellow: #fdc10b;
+    --blue1: #eef6fd;
+    --blue2: #c5daf5;
+    --blue3: #82b5ec;
+    --blue4: #4caee2;
+    --blue5: #4487be;
+    --blue6: #375c86;
+    --blue7: #27355a;
+    --box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, .2);
+    --box-shadow-inset: inset 2px 2px 12px rgba(0, 0, 0, .5);
+    --gradient: linear-gradient(#c5daf5, #eef6fd);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font: 1em Verdana, sans-serif;
+    background-color: #fff;
+    color: var(--black);
+}
+
+.text-center {
+    text-align: center;
+}
+
+.container {
+    max-width: 1400px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin: 0 auto;
+}
+
+.contact-box {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: var(--black);
+    padding: 15px;
+    border-radius: 5px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="phone"],
+input[type="date"] {
+    border: 1px solid var(--black);
+    background-color: var(--white);
+    border-radius: 5px;
+    padding: 9px 12px;
+    width: 100%;
+    font: 1em Verdana, sans-serif;
+    outline: none;
+    margin-bottom: 18px;
+}
+
+.btn,
+a.btn {
+    border-radius: 5px;
+    display: inline-block;
+    padding: 9px 12px;
+    cursor: pointer;
+    border: none;
+    outline: none; /* Eviter bordure sur chrome */
+}
+
+.mini-btn {
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    border: none;
+    outline: none; /* Eviter bordure sur chrome */
+}
+
+.btn-success {
+    color: var(--white);
+    background-color: var(--green);
+}
+.btn-success:hover {
+    background-color: #077707;
+}
+.btn-warning {
+    color: var(--black);
+    background-color: var(--yellow);
+}
+.btn-warning:hover {
+    background-color: #f0bb2b;
+}
+.btn-danger {
+    color: var(--white);
+    background-color: var(--red);
+}
+.btn-danger:hover {
+    background-color: #8f0606;
+}
+
+h2 {
+    text-align: center;
+}
+
+hr {
+    border: 0;
+    border-top: 2px solid var(--grey);
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+/* ----- Tableau avec liste ----- */
+
+.table-list-head {
+    display: flex;
+    background-color: var(--black);
+    color: #fff;
+    font: bold .9rem Arial, sans-serif;
+    /* text-align: center; */
+    /* border-left: 1px solid var(--grey); */
+    border-top: 1px solid var(--grey);
+    border-radius: 5px 5px 0 0;
+}
+
+.table-list-head .e {
+    width: 25%;
+    /* border-right: 1px solid var(--grey); */
+    border-bottom: 1px solid var(--grey);
+    padding: .5rem;
+}
+
+.table-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.table-list li {
+    display: flex;
+    width: 100%;
+    /* border-left: 1px solid var(--grey); */
+    border-bottom: 1px solid var(--grey);
+}
+
+.table-list .e {
+    width: 25%;
+    /* border-right: 1px solid var(--grey); */
+    padding: .5rem;
+}
+
+/* ----- Modal ----- */
+
+/* L'overlay sert à fermer le modal */
+.modal-overlay {
+    display: none; /* Caché par défaut */
+    position: fixed;
+    z-index: 99;
+    left: 0;
+    top: 0;
+    width: 100%; /* Le container prend toute la taille de l'écran pour servir d'overlay pour fermer */
+    height: 100%;
+    overflow-y: auto; /* Scroll si nécessaire  */
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal {
+    position: relative;
+    background-color: #fefefe;
+    margin: 80px auto;
+    padding: 0;
+    border: 1px solid #888;
+    max-width: 600px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+    -webkit-animation-name: animemodal;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animemodal;
+    animation-duration: 0.4s
+}
+
+/* On ajoute l'Animation CSS, car il n'est pas possible de mettre de transition avec display:none et display:block */
+
+/* Ajout Animation du haut vers le bas (facultatif) */
+@-webkit-keyframes animemodal {
+    from {top: -300px; opacity: 0} 
+    to {top: 0; opacity: 1}
+}
+@keyframes animemodal {
+    from {top: -300px; opacity: 0}
+    to {top: 0; opacity: 1}
+}
+
+/* Ajout Animation agrandissement (facultatif) */
+/* @-webkit-keyframes animemodal {
+    from {-webkit-transform: scale(0, 0); opacity: 0} 
+    to {-webkit-transform: scale(1, 1); opacity: 1}
+}
+@keyframes animemodal {
+    from {transform: scale(0, 0); opacity: 0}
+    to {transform: scale(1, 1); opacity: 1}
+} */
+
+.modal-header {
+    padding: 8px 16px;
+    background-color: var(--grey);
+    color: var(--white);
+    min-height: 28px;
+}
+
+.modal-body {padding: 2px 20px 24px;}
+
+.modal .closemodal {
+    float: right;
+    font-size: 18px;
+    font-weight: bold;
+}
+.modal .closemodal:before {
+    content : "\2573";
+}
+.modal .closemodal:hover,
+.modal .closemodal:focus {
+    color: var(--black);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* ----- Si Modal ouvert : ----- */
+
+body.modal-active {
+    height: 100vh;
+    overflow: hidden;
+}
+
+.modal-active .modal-overlay {
+    display: block; /* Modal apparaît si un parent gagne la class="modal-active" */
+}
+
+/* ========== Mobile : ========== */
+
+@media (max-width: 600px) {
+    .modal {
+        margin: 0 auto;
+    }
+}
