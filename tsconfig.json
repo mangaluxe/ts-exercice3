@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "target": "ES6",
+        "rootDir": "./",
+        "outDir": "./",
+    },
+    "include": [
+        "**/*" // Inclure tous les fichiers TypeScript
+    ],
+    "exclude": [
+        "node_modules", // Exclure le dossier node_modules
+        "**/*.spec.ts" // Exclure les fichiers de test si nécessaire
+    ]
+}
