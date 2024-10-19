@@ -11,7 +11,6 @@
     <main class="container">
 
         <h1>Contact</h1>
-        <hr>
     
         <h2>Liste de contact</h2>
     
@@ -23,36 +22,33 @@
             <div class="e">Editer</div>
             <div class="e">Supprimer</div>
         </div>
-        <ul class="table-list" id="result">
-    
-        </ul>
+        <ul class="table-list" id="result"></ul>
 
-        <hr>
 
         <h2>Ajouter contact</h2>
 
         <div class="contact-box">
 
-            <form id="formContact">
+            <form id="form-add-contact">
 
                 <div>
-                    <input placeholder="Votre prénom" name="firstname" type="text">
+                    <input type="text" placeholder="Votre prénom" name="firstname" required>
                 </div>
     
                 <div>
-                    <input placeholder="Votre nom" name="lastname" type="text">
+                    <input type="text" placeholder="Votre nom" name="lastname" required>
                 </div>
         
                 <div>
-                    <input placeholder="Votre date naissance" name="dateOfBirth" type="date">
+                    <input type="date" placeholder="Votre date naissance" name="dateOfBirth" required>
                 </div>
                 
                 <div>
-                    <input placeholder="Votre email" name="email" type="email">
+                    <input type="email" placeholder="Votre email" name="email" required>
                 </div>
     
                 <div>
-                    <input placeholder="Votre téléphone" name="phone" type="phone">
+                    <input type="phone" placeholder="Votre téléphone" name="phone" required>
                 </div>
     
         
@@ -68,37 +64,37 @@
     
 
 
-    <div class="modal-overlay">
+    <div class="edit-form-overlay">
 
         <div class="modal">
             <div class="modal-body">
-                <span class="closemodal"></span>
+                <span class="close-edit-modal"></span>
 
                 <h2>Editer contact <span id="info-id"></span></h2>
 
                 <div class="contact-box">
 
-                    <form id="formContact2">
+                    <form id="form-edit-contact">
                         <input type="hidden" name="id">
         
                         <div>
-                            <input placeholder="Votre prénom" name="firstname" type="text">
+                            <input placeholder="Votre prénom" name="firstname" type="text" required>
                         </div>
             
                         <div>
-                            <input placeholder="Votre nom" name="lastname" type="text">
+                            <input placeholder="Votre nom" name="lastname" type="text" required>
                         </div>
                 
                         <div>
-                            <input placeholder="Votre date naissance" name="dateOfBirth" type="date">
+                            <input placeholder="Votre date naissance" name="dateOfBirth" type="date" required>
                         </div>
                         
                         <div>
-                            <input placeholder="Votre email" name="email" type="email">
+                            <input placeholder="Votre email" name="email" type="email" required>
                         </div>
             
                         <div>
-                            <input placeholder="Votre téléphone" name="phone" type="phone">
+                            <input placeholder="Votre téléphone" name="phone" type="phone" required>
                         </div>
             
                 
@@ -116,7 +112,7 @@
     </div>
 
 
-    <script src="exercice3.js"></script>
+    <script src="script.js"></script>
 
 </body>
 </html>

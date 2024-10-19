@@ -31,9 +31,9 @@ body {
     color: var(--black);
 }
 
-.text-center {
-    text-align: center;
-}
+h2 {margin-top: 50px;}
+
+.text-center {text-align: center;}
 
 .container {
     max-width: 1400px;
@@ -157,7 +157,7 @@ hr {
 /* ----- Modal ----- */
 
 /* L'overlay sert à fermer le modal */
-.modal-overlay {
+.edit-form-overlay {
     display: none; /* Caché par défaut */
     position: fixed;
     z-index: 99;
@@ -214,16 +214,16 @@ hr {
 
 .modal-body {padding: 2px 20px 24px;}
 
-.modal .closemodal {
+.modal .close-edit-modal {
     float: right;
     font-size: 18px;
     font-weight: bold;
 }
-.modal .closemodal:before {
+.modal .close-edit-modal:before {
     content : "\2573";
 }
-.modal .closemodal:hover,
-.modal .closemodal:focus {
+.modal .close-edit-modal:hover,
+.modal .close-edit-modal:focus {
     color: var(--black);
     text-decoration: none;
     cursor: pointer;
@@ -236,7 +236,7 @@ body.modal-active {
     overflow: hidden;
 }
 
-.modal-active .modal-overlay {
+.modal-active .edit-form-overlay {
     display: block; /* Modal apparaît si un parent gagne la class="modal-active" */
 }
 
